@@ -1,0 +1,98 @@
+*simpl.txt*           For Vim version 8               Last change: 2020 Jan 08
+*simpl* *vim-simpl*
+
+                      _                   _      ~
+                     | |_ _ __ ___  _ __ | |_ __ ~
+                     | __| '_ ` _ \| '_ \| | '__|~
+                     | |_| | | | | | |_) | | |   ~
+                      \__|_| |_| |_| .__/|_|_|   ~
+                                   |_|           ~
+
+                   The holiest cli template system. In vim.
+
+==============================================================================
+CONTENTS                                                      *simpl-contents*
+
+    1. Intro ................................................... |simpl-intro|
+    2. Usage ................................................... |simpl-usage|
+    3. Configuration ................................... |simpl-configuration|
+    4. License ............................................... |simpl-license|
+    5. Bugs ..................................................... |simpl-bugs|
+    6. Contributing ..................................... |simpl-contributing|
+    7. Credits ............................................... |simpl-credits|
+
+==============================================================================
+INTRO                                                            *simpl-intro*
+
+simpl is (Yet another) REPL/interpreter plugin for vim
+
+==============================================================================
+USAGE                                                            *simpl-usage*
+
+Install it with your favorite plugin manager, and then use the provided
+interface.
+
+The author has gotten a great deal of mileage out of the following mappings: >
+
+    nnoremap <leader>t :call simpl#repl('++close')<CR>
+    nnoremap <leader>T :call simpl#repl()<CR>
+    nnoremap <localleader>l :call simpl#load()<CR>
+    nnoremap <localleader>L :call simpl#prompt_and_load()<CR>
+<
+*simpl#repl()*
+
+    Runs a REPL/interpreter.
+    Uses `b:interpreter` if set; 'shell' otherwise.
+    Function arguments are provided as options to the `:terminal` command.
+
+*simpl#load()*
+
+*simpl#prompt_and_load()*
+
+==============================================================================
+CONFIGURATION                                             *simpl-configuration*
+
+simpl's configuration consists of two pieces: the preferred REPL/interpreter,
+and the filetype-based load-callbacks.
+
+The first is `b:interpreter`. See |simpl#repl|.
+
+The second is more complicated
+
+------------------------------------------------------------------------------
+                                                              *simpl-filetype*
+
+==============================================================================
+LICENSE                                                        *simpl-license*
+
+MIT License. Copyright © 2019 D. Ben Knoble
+Full text available at
+https://github.com/benknoble/vim-simpl/blob/master/LICENSE
+
+==============================================================================
+BUGS                                                              *simpl-bugs*
+
+At the time of this writing, no major bugs have been found.
+
+If you find one and wish to report it, you can do so at
+https://github.com/benknoble/vim-simpl/issues
+
+==============================================================================
+CONTRIBUTING                                              *simpl-contributing*
+
+Want to submit a new feature, bugfix, or hack on simpl?
+Submit pull requests to
+https://github.com/benknoble/vim-simpl/pulls
+
+Existing code determines style guidelines.
+
+==============================================================================
+CREDITS                                                        *simpl-credits*
+
+Maintained by:
+- D. Ben Knoble (https://github.com/benknoble)
+
+Git repository:
+https://github.com/benknoble/vim-simpl
+
+ vim:tw=78:ts=8:ft=help:norl:
