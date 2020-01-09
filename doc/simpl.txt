@@ -39,21 +39,30 @@ The author has gotten a great deal of mileage out of the following mappings: >
     nnoremap <localleader>l :call simpl#load()<CR>
     nnoremap <localleader>L :call simpl#prompt_and_load()<CR>
 <
-*simpl#repl()*
+                                                                  *simpl#repl*
+simpl#repl([{opts}])
+                Runs a REPL/interpreter. Uses `b:interpreter` if set; 'shell'
+                otherwise. Function arguments are provided as options to the
+                `:terminal` command.
 
-    Runs a REPL/interpreter.
-    Uses `b:interpreter` if set; 'shell' otherwise.
-    Function arguments are provided as options to the `:terminal` command.
+                                                                  *simpl#load*
+simpl#load()
+                Loads a file or module into the REPL/interpreter. Opens one if
+                none exists. Passes the current file as arguments to the
+                filetype's callback.
 
-*simpl#load()*
 
-*simpl#prompt_and_load()*
+                                                       *simpl#prompt_and_load*
+simpl#prompt_and_load()
+                Loads a file or module into the REPL/interpreter. Opens one
+                if none exists. Prompts for a filename based on the
+                filetype's callback.
 
 ==============================================================================
 CONFIGURATION                                             *simpl-configuration*
 
-simpl's configuration consists of two pieces: the preferred REPL/interpreter,
-and the filetype-based load-callbacks.
+simpl's main configuration consists of two pieces: the preferred
+REPL/interpreter, and the filetype-based load-callbacks.
 
 The first is `b:interpreter`. See |simpl#repl|.
 
