@@ -71,6 +71,40 @@ The second is more complicated
 ------------------------------------------------------------------------------
                                                               *simpl-filetype*
 
+simpl needs two pieces of information to correctly process calls to
+|simpl#load| and |simpl#prompt_and_load| for a given filetype. Namely, it
+needs
+
+    - a way to construct the "load" code; and
+    - prompt text
+
+simpl supports the execution of arbitrary code to determine these properties;
+see the provided plugin code for examples.
+
+To register a filetype, call |simpl#register| with the appropriate parameters.
+
+                                                              *simpl#register*
+simpl#register(filetype, BuildLoadExpr, GetPromptText)
+                Registers `filetype` with simpl.
+
+                Both `BuildLoadExpr` and `GetPromptText` are |Funcrefs|. If
+                your vim supports |lambda|s, those count as |Funcrefs|.
+
+                `BuildLoadExpr` is called with a single parameter: the name of
+                a file. It must return a string representing
+                language-appropriate code that would load the given file or
+                module. This may be arbitrarily complex.
+
+                `GetPromptText` is called with no parameters. It must return a
+                string representing a language-appropriate prompt, indicating
+                that a file or module is to be loaded. This may be arbitrarily
+                complex.
+
+                                                         *g:simpl_no_defaults*
+If truthy, simpl will not register its default filetype information. Note
+however that, when calling |simpl#register| with the same filetype, the
+last call will override all others.
+
 ==============================================================================
 LICENSE                                                        *simpl-license*
 
