@@ -30,3 +30,8 @@ call simpl#register(
       \ 'sh',
       \ {f -> printf("source %s\n", f)},
       \ {-> 'source '})
+
+call simpl#register(
+      \ 'clojure',
+      \ {s -> printf("(load-file \"%s\")\n", s)},
+      \ {-> '(require) '})
