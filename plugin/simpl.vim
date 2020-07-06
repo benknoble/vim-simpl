@@ -35,3 +35,8 @@ call simpl#register(
       \ 'clojure',
       \ {s -> printf("(load-file \"%s\")\n", s)},
       \ {-> '(require) '})
+
+call simpl#register(
+      \ 'prolog',
+      \ {s -> printf("[\"%s\"].\n", fnamemodify(s, ':r'))},
+      \ {-> '?- '})
