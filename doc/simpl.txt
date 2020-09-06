@@ -43,6 +43,10 @@ simpl#repl([{opts}])
                 otherwise. Function arguments are provided as options to the
                 `:terminal` command.
 
+                                                                 *simpl#shell*
+simpl#shell([{opts}])
+                Like |simpl#repl|, but forces the use of 'shell'.
+
                                                                   *simpl#load*
 simpl#load()
                 Loads a file or module into the REPL/interpreter. Opens one if

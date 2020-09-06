@@ -10,6 +10,16 @@ function simpl#repl(...) abort
   execute l:command
 endfunction
 
+function simpl#shell(...) abort
+  if has_key(b:, 'interpreter')
+    let [l:old_interpreter, b:interpreter] = [b:interpreter, '']
+  endif
+  call call('simpl#repl', a:000)
+  if has_key(b:, 'interpreter')
+    let b:interpreter = l:old_interpreter
+  endif
+endfunction
+
 function s:simpl() abort
   return get(g:, 'simpl', {})
 endfunction
