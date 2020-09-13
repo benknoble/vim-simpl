@@ -11,12 +11,15 @@ function simpl#repl(...) abort
 endfunction
 
 function simpl#shell(...) abort
-  if has_key(b:, 'interpreter')
-    let [l:old_interpreter, b:interpreter] = [b:interpreter, '']
+  const l:save_restore = has_key(b:, 'interpreter')
+  if l:save_restore
+    let l:old_buf = bufnr('%')
+    let l:old_interpreter = b:interpreter
+    unlet b:interpreter
   endif
   call call('simpl#repl', a:000)
-  if has_key(b:, 'interpreter')
-    let b:interpreter = l:old_interpreter
+  if l:save_restore
+    call setbufvar(l:old_buf, 'interpreter', l:old_interpreter)
   endif
 endfunction
 
