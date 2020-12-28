@@ -71,3 +71,8 @@ call simpl#register(
       \ 'prolog',
       \ {s -> printf("[\"%s\"].\n", fnamemodify(s, ':r'))},
       \ {-> '?- '})
+
+call simpl#register(
+      \ 'racket',
+      \ {s -> printf(",enter %s\n", s)},
+      \ {-> '(enter!) '})
