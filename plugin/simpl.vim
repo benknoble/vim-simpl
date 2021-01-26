@@ -74,5 +74,5 @@ call simpl#register(
 
 call simpl#register(
       \ 'racket',
-      \ {s -> printf(",enter %s\n", s)},
-      \ {-> '(enter!) '})
+      \ {s -> printf(",require-reloadable %s\n", s)},
+      \ {-> ',require-reloadable '})
