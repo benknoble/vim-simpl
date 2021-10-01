@@ -25,6 +25,21 @@ function simpl#shell(...) abort
   return id
 endfunction
 
+function s:popup(id) abort
+  const buf = win_id2win(a:id)->winbufnr()
+  call win_gotoid(a:id)
+  hide
+  return popup_create(buf, #{minheight: &lines-10, minwidth: &columns-10, border:[], padding: []})
+endfunction
+
+function simpl#popup_repl(...) abort
+  return s:popup(call('simpl#repl', ['++close'] + a:000))
+endfunction
+
+function simpl#popup_shell(...) abort
+  return s:popup(call('simpl#shell', ['++close'] + a:000))
+endfunction
+
 function s:simpl() abort
   return get(g:, 'simpl', {})
 endfunction
