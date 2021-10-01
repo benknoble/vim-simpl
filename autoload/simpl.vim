@@ -8,6 +8,7 @@ function simpl#repl(...) abort
   endif
   let l:command .= printf(' %s', l:interpreter)
   execute l:command
+  return win_getid()
 endfunction
 
 function simpl#shell(...) abort
@@ -17,10 +18,11 @@ function simpl#shell(...) abort
     let l:old_interpreter = b:interpreter
     unlet b:interpreter
   endif
-  call call('simpl#repl', a:000)
+  const id = call('simpl#repl', a:000)
   if l:save_restore
     call setbufvar(l:old_buf, 'interpreter', l:old_interpreter)
   endif
+  return id
 endfunction
 
 function s:simpl() abort
