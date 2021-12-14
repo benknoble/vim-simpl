@@ -47,14 +47,14 @@ simpl#repl([{opts}])
 simpl#shell([{opts}])
                 Like |simpl#repl|, but forces the use of 'shell'.
 
-                                                                  *simpl#repl*
+                                                            *simpl#popup_repl*
 simpl#popup_repl([{opts}])
                 Like |simpl#repl| with `++close`, but uses a popup. You must
                 close the popup (e.g., by quitting the repl) to continue. Call
                 |popup_clear()| in a pinch, but note that the repl may still
                 be running if you do.
 
-                                                                 *simpl#shell*
+                                                           *simpl#popup_shell*
 simpl#popup_shell([{opts}])
                 Like |simpl#shell| with `++close`, but uses a popup. You must
                 close the popup (e.g., by quitting the shell) to continue.
