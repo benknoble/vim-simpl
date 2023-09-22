@@ -41,38 +41,49 @@ The author has gotten a great deal of mileage out of the following mappings: >
 simpl#repl([{opts}])
                 Runs a REPL/interpreter. Uses `b:interpreter` if set; 'shell'
                 otherwise. Function arguments are provided as options to the
-                `:terminal` command.
+                `:terminal` command. See also |simpl_mods|.
 
                                                                  *simpl#shell*
 simpl#shell([{opts}])
-                Like |simpl#repl|, but forces the use of 'shell'.
+                Like |simpl#repl|, but forces the use of 'shell'. See also
+                |simpl_mods|.
 
                                                             *simpl#popup_repl*
 simpl#popup_repl([{opts}])
                 Like |simpl#repl| with `++close`, but uses a popup. You must
                 close the popup (e.g., by quitting the repl) to continue. Call
                 |popup_clear()| in a pinch, but note that the repl may still
-                be running if you do.
+                be running if you do. See also |simpl_mods|.
 
                                                            *simpl#popup_shell*
 simpl#popup_shell([{opts}])
                 Like |simpl#shell| with `++close`, but uses a popup. You must
                 close the popup (e.g., by quitting the shell) to continue.
                 Call |popup_clear()| in a pinch, but note that the shell may
-                still be running if you do.
+                still be running if you do. See also |simpl_mods|.
 
                                                                   *simpl#load*
 simpl#load()
                 Loads a file or module into the REPL/interpreter. Opens one if
                 none exists. Passes the current file as arguments to the
-                filetype's callback.
+                filetype's callback. See also |simpl_mods|.
 
 
                                                        *simpl#prompt_and_load*
 simpl#prompt_and_load()
                 Loads a file or module into the REPL/interpreter. Opens one
                 if none exists. Prompts for a filename based on the
-                filetype's callback.
+                filetype's callback. See also |simpl_mods|.
+
+                                                                  *simpl_mods*
+This global-local variable influences how new windows are opened. It defaults
+to "no modifiers," but you can use `b:simpl_mods` and `g:simpl_mods` to
+override it (with the expected precedence). These are expected to be command
+modifiers like in |<mods>|.
+
+NOTE this may interact poorly with |simpl#popup_repl| and |simpl#popup_shell|,
+which will use the same <mods> before closing the opened window to reopen it
+as a popup.
 
 ==============================================================================
 CONFIGURATION                                             *simpl-configuration*

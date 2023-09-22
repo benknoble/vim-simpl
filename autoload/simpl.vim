@@ -7,7 +7,7 @@ function simpl#repl(...) abort
     endfor
   endif
   let l:command .= printf(' %s', l:interpreter)
-  execute l:command
+  execute s:mods() l:command
   return win_getid()
 endfunction
 
@@ -84,4 +84,8 @@ function simpl#register(filetype, BuildLoadExpr, GetPromptText) abort
         \ 'buildloadexpr': a:BuildLoadExpr,
         \ 'getprompttext': a:GetPromptText
         \ }
+endfunction
+
+function s:mods() abort
+  return get(b:, 'simpl_mods', get(g:, 'simpl_mods', ''))
 endfunction
