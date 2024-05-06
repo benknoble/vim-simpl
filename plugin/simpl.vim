@@ -76,3 +76,8 @@ call simpl#register(
       \ 'racket',
       \ {s -> printf(",enter \"%s\"\n", escape(s, '"'))},
       \ {-> ',enter '})
+
+call simpl#register(
+      \ 'scheme',
+      \ { s -> printf("(load \"%s\")\n", s)},
+      \ {-> '(load) '})
