@@ -2,7 +2,7 @@ function simpl#repl(...) abort
   let l:interpreter = get(b:, 'interpreter', &shell)
   let l:command = 'term'
   if a:0
-    for l:opt in a:000
+    for l:opt in a:000[0]
       let l:command .= printf(' %s', opt)
     endfor
   endif
@@ -48,10 +48,10 @@ function s:should_do_load() abort
   return has_key(s:simpl(), &filetype)
 endfunction
 
-function s:do_load(expr) abort
+function s:do_load(expr, ...) abort
   let l:terms = term_list()
   if empty(term_list())
-    call simpl#repl('++close')
+    call call(function("simpl#repl"), a:000)
     let l:terms = term_list()
   endif
 
@@ -61,20 +61,20 @@ function s:do_load(expr) abort
   exec l:win 'wincmd w'
 endfunction
 
-function simpl#load() abort
+function simpl#load(...) abort
   if s:should_do_load()
     let l:file = expand('%')
     let l:code = s:simpl()[&filetype]['buildloadexpr'](l:file)
-    call s:do_load(l:code)
+    call s:do_load(l:code, a:000)
   endif
 endfunction
 
-function simpl#prompt_and_load() abort
+function simpl#prompt_and_load(term_opts) abort
   if s:should_do_load()
     let l:text = s:simpl()[&filetype]['getprompttext']()
     let l:file = input(l:text, expand('%'), 'file')
     let l:code = s:simpl()[&filetype]['buildloadexpr'](l:file)
-    call s:do_load(l:code)
+    call s:do_load(l:code, a:term_opts)
   endif
 endfunction
 

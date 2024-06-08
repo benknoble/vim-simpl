@@ -63,9 +63,12 @@ simpl#popup_shell([{opts}])
                 still be running if you do. See also |simpl_mods|.
 
                                                                   *simpl#load*
-simpl#load()
+simpl#load([{opts}])
                 Loads a file or module into the REPL/interpreter. Opens one if
-                none exists. Passes the current file as arguments to the
+                none exists. If none exists, the optional parameter {opts} is
+		passed to the newly created terminal buffer; {opts} should be
+		terminal options, for instance '++rows=10'.
+		simpl#load passes the current file as arguments to the
                 filetype's callback. See also |simpl_mods|.
 
 
