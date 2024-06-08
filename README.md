@@ -65,6 +65,8 @@ The first loads the current buffer:
 call simpl#load()
 ```
 
+See the docs for more on this function's arguments.
+
 The second prompts for a buffer to load:
 
 ```vim
