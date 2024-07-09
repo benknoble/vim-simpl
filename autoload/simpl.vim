@@ -69,12 +69,12 @@ function simpl#load(...) abort
   endif
 endfunction
 
-function simpl#prompt_and_load(term_opts) abort
+function simpl#prompt_and_load(...) abort
   if s:should_do_load()
     let l:text = s:simpl()[&filetype]['getprompttext']()
     let l:file = input(l:text, expand('%'), 'file')
     let l:code = s:simpl()[&filetype]['buildloadexpr'](l:file)
-    call s:do_load(l:code, a:term_opts)
+    call s:do_load(l:code, a:000)
   endif
 endfunction
 
