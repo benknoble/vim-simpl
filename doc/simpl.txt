@@ -55,6 +55,15 @@ simpl#popup_repl([{opts}])
                 |popup_clear()| in a pinch, but note that the repl may still
                 be running if you do. See also |simpl_mods|.
 
+                                                            *simpl#popup_load*
+simpl#popup_load([{opts}])
+                Like |simpl#load| with `++close`, but uses a popup. Opposite
+		of *simpl#repl* , this loads the file contents into the pop-up
+		REPL.
+		You must close the popup (e.g., by quitting the repl) to continue,
+		using a keyboard shortcut such as CTRL+C or CTRL+D often works.
+                See also |simpl_mods|.
+
                                                            *simpl#popup_shell*
 simpl#popup_shell([{opts}])
                 Like |simpl#shell| with `++close`, but uses a popup. You must
@@ -142,6 +151,13 @@ simpl#register(filetype, BuildLoadExpr, GetPromptText)
 If truthy, simpl will not register its default filetype information. Note
 however that, when calling |simpl#register| with the same filetype, the
 last call will override all others.
+
+                                                         *b:simpl_popup_options*
+Dictionary, see *popup_create-arguments* {options}. If you wish to override
+the default popup arguments, you may `let b:simpl_popup_conf`  
+The default settings are:  
+`#{minheight: &lines-10, minwidth: &columns-10, border:[], padding: []}`
+
 
 ==============================================================================
 LICENSE                                                        *simpl-license*
