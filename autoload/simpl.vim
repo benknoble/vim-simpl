@@ -2,7 +2,7 @@ function simpl#repl(...) abort
   let l:interpreter = get(b:, 'interpreter', &shell)
   let l:command = 'term'
   if a:0
-    for l:opt in a:000[0]
+    for l:opt in a:000
       let l:command .= printf(' %s', opt)
     endfor
   endif
@@ -65,7 +65,7 @@ function simpl#load(...) abort
   if s:should_do_load()
     let l:file = expand('%')
     let l:code = s:simpl()[&filetype]['buildloadexpr'](l:file)
-    call s:do_load(l:code, a:000)
+		call call(function('s:do_load'), [l:code] + a:000)
   endif
 endfunction
 
@@ -74,7 +74,7 @@ function simpl#prompt_and_load(...) abort
     let l:text = s:simpl()[&filetype]['getprompttext']()
     let l:file = input(l:text, expand('%'), 'file')
     let l:code = s:simpl()[&filetype]['buildloadexpr'](l:file)
-    call s:do_load(l:code, a:000)
+		call call(function('s:do_load'), [l:code] + a:000)
   endif
 endfunction
 
