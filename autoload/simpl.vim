@@ -65,7 +65,7 @@ function simpl#load(...) abort
   if s:should_do_load()
     let l:file = expand('%')
     let l:code = s:simpl()[&filetype]['buildloadexpr'](l:file)
-		call call(function('s:do_load'), [l:code] + a:000)
+    call call(function('s:do_load'), [l:code] + a:000)
   endif
 endfunction
 
@@ -74,7 +74,7 @@ function simpl#prompt_and_load(...) abort
     let l:text = s:simpl()[&filetype]['getprompttext']()
     let l:file = input(l:text, expand('%'), 'file')
     let l:code = s:simpl()[&filetype]['buildloadexpr'](l:file)
-		call call(function('s:do_load'), [l:code] + a:000)
+    call call(function('s:do_load'), [l:code] + a:000)
   endif
 endfunction
 
