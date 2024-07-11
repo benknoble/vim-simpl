@@ -63,17 +63,28 @@ simpl#popup_shell([{opts}])
                 still be running if you do. See also |simpl_mods|.
 
                                                                   *simpl#load*
-simpl#load()
+simpl#load([{opts}])
                 Loads a file or module into the REPL/interpreter. Opens one if
-                none exists. Passes the current file as arguments to the
+                none exists. The optional parameters {opts} are passed to the
+                newly created terminal buffer; {opts} should be |:terminal|
+                options separated by a comma (see |term++close|). For
+                example: >
+
+    :call simpl#load('++rows=10', '++close')
+<
+                This function passes the current file as arguments to the
                 filetype's callback. See also |simpl_mods|.
 
 
                                                        *simpl#prompt_and_load*
-simpl#prompt_and_load()
+simpl#prompt_and_load([{opts}])
                 Loads a file or module into the REPL/interpreter. Opens one
-                if none exists. Prompts for a filename based on the
-                filetype's callback. See also |simpl_mods|.
+                if none exists. Prompts for a filename based on the filetype's
+                callback. See also |simpl_mods|.
+
+                The optional variadic parameters {opts} are passed to the
+                terminal buffer if no terminal buffer already exists. See
+                |simpl#load| for details.
 
                                                                   *simpl_mods*
 This global-local variable influences how new windows are opened. It defaults
