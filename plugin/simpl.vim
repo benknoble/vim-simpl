@@ -42,15 +42,22 @@ function s:sml_load(file) abort
   return printf("use \"%s\";\n", a:file)
 endfunction
 
+function s:lisp_load(file) abort
+  " double-quotes necessary for \n expansion
+  return printf("(load #P\"%s\")\n", a:file)
+endfunction
+
+function s:fsharp_load(file) abort
+  let l:module_name = fnamemodify(a:file, ':r')
+  let l:module_name = toupper(l:module_name[0]) .. l:module_name[1:]
+  return printf("#load \"%s\";;\nopen %s;;\n", fnameescape(a:file), l:module_name)
+endfunction
+
 call simpl#register(
       \ 'sml',
       \ funcref('s:sml_load'),
       \ {-> 'use '})
 
-function s:lisp_load(file) abort
-  " double-quotes necessary for \n expansion
-  return printf("(load #P\"%s\")\n", a:file)
-endfunction
 
 call simpl#register(
       \ 'lisp',
@@ -81,3 +88,8 @@ call simpl#register(
       \ 'scheme',
       \ { s -> printf("(load \"%s\")\n", s)},
       \ {-> '(load) '})
+
+call simpl#register(
+      \ 'fsharp',
+      \ funcref('s:fsharp_load'),
+      \ {-> '#load '})
