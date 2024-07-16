@@ -81,3 +81,17 @@ call simpl#register(
       \ 'scheme',
       \ { s -> printf("(load \"%s\")\n", s)},
       \ {-> '(load) '})
+
+function s:fsharp_load(file) abort
+  let l:module_name = fnamemodify(a:file, ':r')
+  if l:module_name =~# '^\u'
+    return printf("#load \"%s\";;\nopen %s;;\n", a:file, l:module_name)
+  else
+    return printf("#load \"%s\";;\n", a:file)
+  endif
+endfunction
+
+call simpl#register(
+      \ 'fsharp',
+      \ funcref('s:fsharp_load'),
+      \ {-> '#load '})
