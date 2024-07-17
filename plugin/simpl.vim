@@ -50,7 +50,7 @@ endfunction
 function s:fsharp_load(file) abort
   let l:module_name = fnamemodify(a:file, ':r')
   let l:module_name = toupper(l:module_name[0]) .. l:module_name[1:]
-  return printf("#load \"%s\";;\nopen %s;;\n", escape(a:file, '"'), l:module_name)
+  return printf("#load \"%s\";;\nopen %s;;\n", fnameescape(a:file), l:module_name)
 endfunction
 
 call simpl#register(
