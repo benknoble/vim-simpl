@@ -26,7 +26,7 @@ function simpl#shell(...) abort
 endfunction
 
 function s:popup(win_id, ...) abort
-	let l:options = !empty(a:000) ? a:000[0] : #{}
+  let l:options = !empty(a:000) ? a:000[0] : #{}
   const buf = win_id2win(a:win_id)->winbufnr()
   call win_gotoid(a:win_id)
   hide
@@ -34,7 +34,7 @@ function s:popup(win_id, ...) abort
 endfunction
 
 function s:popup_options() abort
-	return get(b:, "simpl_popup_options", #{minheight: &lines-10, minwidth: &columns-10, border:[], padding: []})
+  return get(b:, "simpl_popup_options", #{minheight: &lines-10, minwidth: &columns-10, border:[], padding: []})
 endfunction
 
 function simpl#popup_repl(...) abort
@@ -43,15 +43,15 @@ endfunction
 
 function simpl#popup_load(...) abort
   let l:file = expand('%')
-	let l:code = s:simpl()[&filetype]['buildloadexpr'](l:file)
-	let l:term_win_id = call("simpl#repl", ['++close'] + a:000)
+  let l:code = s:simpl()[&filetype]['buildloadexpr'](l:file)
+  let l:term_win_id = call("simpl#repl", ['++close'] + a:000)
   call term_sendkeys(win_id2win(l:term_win_id)->winbufnr(), l:code)
   let l:popup = s:popup(l:term_win_id, s:popup_options())
-	" The pop-up does not seem to delete closed terminal buffers.
-	" This in turn would break calls to simpl#load();
-	" it would try to load code in an inactive terminal buffer.
-	if &buftype == 'terminal' | setlocal bufhidden=wipe | endif
-	return l:popup
+  " The pop-up does not seem to delete closed terminal buffers.
+  " This in turn would break calls to simpl#load();
+  " it would try to load code in an inactive terminal buffer.
+  if &buftype == 'terminal' | setlocal bufhidden=wipe | endif
+  return l:popup
 endfunction
 
 function simpl#popup_shell(...) abort
