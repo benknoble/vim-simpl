@@ -50,9 +50,15 @@ endfunction
 
 function s:do_load(expr, ...) abort
   let l:terms = term_list()
-  if empty(term_list())
+  call filter(l:terms, 'bufwinid(v:val) isnot# -1 && term_getstatus(v:val) =~# "running"')
+  if empty(l:terms)
     call call(function("simpl#repl"), a:000)
     let l:terms = term_list()
+    call filter(l:terms, 'bufwinid(v:val) isnot# -1 && term_getstatus(v:val) =~# "running"')
+  endif
+
+  if empty(l:terms)
+    return
   endif
 
   let l:term = l:terms[0]
