@@ -37,6 +37,8 @@ The author has gotten a great deal of mileage out of the following mappings: >
     nnoremap <localleader>l :call simpl#load()<CR>
     nnoremap <localleader>L :call simpl#prompt_and_load()<CR>
 <
+Functions which create popups are influenced by |g:simpl_popup_options|.
+
                                                                   *simpl#repl*
 simpl#repl([{opts}])
                 Runs a REPL/interpreter. Uses `b:interpreter` if set; 'shell'
@@ -93,6 +95,14 @@ modifiers like in |<mods>|.
 NOTE this may interact poorly with |simpl#popup_repl| and |simpl#popup_shell|,
 which will use the same <mods> before closing the opened window to reopen it
 as a popup.
+
+                                                         *g:simpl_popup_options*
+                                                         *b:simpl_popup_options*
+Dictionary passed to |popup_create-arguments|. If you wish to override the
+default popup arguments, you may set this buffer-local variable. The default
+settings are: >
+    #{minheight: &lines-10, minwidth: &columns-10, border:[], padding: []}
+Values from the buffer-local variable overwrite any global variable values.
 
 ==============================================================================
 CONFIGURATION                                             *simpl-configuration*

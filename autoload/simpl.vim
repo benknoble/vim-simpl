@@ -29,7 +29,15 @@ function s:popup(id) abort
   const buf = win_id2win(a:id)->winbufnr()
   call win_gotoid(a:id)
   hide
-  return popup_create(buf, #{minheight: &lines-10, minwidth: &columns-10, border:[], padding: []})
+  return popup_create(buf, s:popup_options())
+endfunction
+
+function s:popup_options() abort
+  " look in current buffer and previous (since we just created the terminal buffer)
+  return get(b:, 'simpl_popup_options',
+        \ getbufvar('#', 'simpl_popup_options',
+        \ get(g:, 'simpl_popup_options',
+        \ #{minheight: &lines-10, minwidth: &columns-10, border:[], padding: []})))
 endfunction
 
 function simpl#popup_repl(...) abort
