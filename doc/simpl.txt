@@ -51,16 +51,14 @@ simpl#shell([{opts}])
                                                             *simpl#popup_repl*
 simpl#popup_repl([{opts}])
                 Like |simpl#repl| with `++close`, but uses a popup. You must
-                close the popup (e.g., by quitting the repl) to continue. Call
-                |popup_clear()| in a pinch, but note that the repl may still
-                be running if you do. See also |simpl_mods|.
+                close the popup (e.g., by quitting the repl) to continue. See
+                also |simpl_mods|.
 
                                                            *simpl#popup_shell*
 simpl#popup_shell([{opts}])
                 Like |simpl#shell| with `++close`, but uses a popup. You must
-                close the popup (e.g., by quitting the shell) to continue.
-                Call |popup_clear()| in a pinch, but note that the shell may
-                still be running if you do. See also |simpl_mods|.
+                close the popup (e.g., by quitting the shell) to continue. See
+                also |simpl_mods|.
 
                                                                   *simpl#load*
 simpl#load([{opts}])
