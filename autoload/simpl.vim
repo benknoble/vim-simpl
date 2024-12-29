@@ -26,6 +26,9 @@ function simpl#shell(...) abort
 endfunction
 
 function s:popup(id) abort
+  if a:id is# 0
+    return
+  endif
   const buf = win_id2win(a:id)->winbufnr()
   call win_gotoid(a:id)
   hide
@@ -42,6 +45,10 @@ endfunction
 
 function simpl#popup_repl(...) abort
   return s:popup(call('simpl#repl', ['++close'] + a:000))
+endfunction
+
+function simpl#popup_load(...) abort
+  return s:popup(call('simpl#load', ['++close'] + a:000))
 endfunction
 
 function simpl#popup_shell(...) abort
@@ -73,14 +80,16 @@ function s:do_load(expr, ...) abort
   call term_sendkeys(l:term, a:expr)
   let l:win = bufwinnr(l:term)
   exec l:win 'wincmd w'
+  return win_getid(l:win)
 endfunction
 
 function simpl#load(...) abort
   if s:should_do_load()
     let l:file = expand('%')
     let l:code = s:simpl()[&filetype]['buildloadexpr'](l:file)
-    call call(function('s:do_load'), [l:code] + a:000)
+    return call(function('s:do_load'), [l:code] + a:000)
   endif
+  return 0
 endfunction
 
 function simpl#prompt_and_load(...) abort
@@ -88,8 +97,9 @@ function simpl#prompt_and_load(...) abort
     let l:text = s:simpl()[&filetype]['getprompttext']()
     let l:file = input(l:text, expand('%'), 'file')
     let l:code = s:simpl()[&filetype]['buildloadexpr'](l:file)
-    call call(function('s:do_load'), [l:code] + a:000)
+    return call(function('s:do_load'), [l:code] + a:000)
   endif
+  return 0
 endfunction
 
 function simpl#register(filetype, BuildLoadExpr, GetPromptText) abort

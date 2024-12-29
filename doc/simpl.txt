@@ -75,6 +75,11 @@ simpl#load([{opts}])
                 This function passes the current file as arguments to the
                 filetype's callback. See also |simpl_mods|.
 
+                                                            *simpl#popup_load*
+simpl#popup_load([{opts}])
+                Like |simpl#load| with `++close`, but uses a popup. You must
+                close the popup (e.g., by quitting the repl) to continue. See
+                also |simpl_mods|.
 
                                                        *simpl#prompt_and_load*
 simpl#prompt_and_load([{opts}])
